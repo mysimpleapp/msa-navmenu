@@ -1,0 +1,114 @@
+<link rel="import" href="../mySimpleApp/mySimpleApp.pack.html"></link>
+<template>
+	<style>
+		header {
+			font-weight: bold;
+			background: #fff;
+			width: 100%;
+			height: 76px;
+			border-bottom: 4px solid #4C9CF1;
+			box-shadow: 0 0 3pt 2pt #aaa;
+		}
+		header a {
+			text-decoration: none;
+			color: #4C9CF1;
+		}
+		#logo{
+			margin: 20px;
+			float: left;
+			font-size: 36px;
+		}
+		nav {
+			float: right;
+			padding: 20px;
+		}
+		nav a#menu-icon {
+			display: none;
+		}
+		nav #menu ul {
+			list-style: none;
+		}
+		nav #menu li {
+			display: inline-block;
+			float: left;
+			padding: 10px;
+			font-size: 18px;
+		}
+		nav #menu li a:hover {
+			text-decoration: underline;
+		}
+		
+		/*MEDIA QUERY*/
+		@media only screen and (max-width : 640px) {
+			nav {
+				float: none;
+				padding: 0;
+			}
+			nav a#menu-icon {
+				display:inline-block;
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				width:34px;
+				height:34px;
+			}
+			nav a#menu-icon i {
+				display: block;
+				width:20px;
+				height:3px;
+				box-shadow:inset 0 0 0 32px,0 -6px,0 6px;
+				margin:16px 7px
+			}
+			nav #menu {
+				display: none;
+				position: absolute;
+				right: 20px;
+				top: 20px;
+				z-index: 100;
+				padding-top: 50px;
+			}
+			nav #menu ul {
+				display: inline-block;
+				background: white;
+				padding: 15px;
+				margin: 0;
+				border: 5px solid #4C9CF1;
+				border-radius: 4px;
+				box-shadow: 2pt 2pt 3pt 0pt #aaa;
+			}
+			nav #menu li {
+				text-align: center;
+				width: 100%;
+			}
+			nav:hover a#menu-icon {
+				box-shadow: 1pt 1pt 3pt 2pt #aaa;
+				border-radius: 3pt;
+			}
+			nav:hover #menu {
+				display: block;
+			}
+		}
+	</style>
+	<header>
+		<a href="#" id="logo">MY SIMPLE APP</a>
+		<nav>
+			<a href="#" id="menu-icon"><i></i></a>
+			<span id="menu">
+				<ul>
+					<li ?if="!user.logged"><a href="#msa-user/msa-login">Log in</a></li>
+					<li ?if="!user.logged"><a href="#msa-user/msa-register">Sign up</a></li>
+					<li ?if="user.logged">?{user.name}</li>
+					<li ?if="user.logged"><a href="javascript:void(0)" ?onclick="App.post('user', {act:'logout'}, user)">Log out</a></li>
+				</ul>
+			</span>
+		</nav>
+	</header>
+</template>
+<script>
+(function() {
+	App.registerElement("msa-navmenu", function(){
+		// bind
+		Bind(this.shadowRoot.querySelector("header"), {user:App.user});
+	});
+})();
+</script>
