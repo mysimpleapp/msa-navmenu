@@ -7,5 +7,9 @@
   ],
   "description": "Default navigation menu for MySimpleApp application.",
   "main": "msa-navmenu.html",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mysimpleapp": "*",
+    "msa-user": "*"
+  }
 }
