@@ -1,4 +1,4 @@
-<link rel="import" href="../mySimpleApp/mySimpleApp.pack.html"></link>
+<link rel="import" href="../mysimpleapp/mysimpleapp.pack.html"></link>
 <template>
 	<style>
 		header {
@@ -92,13 +92,13 @@
 	<header>
 		<a href="#" id="logo">MY SIMPLE APP</a>
 		<nav>
-			<a href="#" id="menu-icon"><i></i></a>
+			<a href="/" id="menu-icon"><i></i></a>
 			<span id="menu">
 				<ul>
-					<li ?if="!user.name"><a href="#msa-user/msa-login">Log in</a></li>
-					<li ?if="!user.name"><a href="#msa-user/msa-register">Sign up</a></li>
+					<li ?if="!user.name"><a href="/user/login">Log in</a></li>
+					<li ?if="!user.name"><a href="/user/register">Sign up</a></li>
 					<li ?if="user.name">?{user.name}</li>
-					<li ?if="user.name"><a href="javascript:void(0)" ?onclick="App.post('user', 'logout', null, user)">Log out</a></li>
+					<li ?if="user.name"><a href="javascript:void(0)" ?onclick="App.post('/user/logout', null, user)">Log out</a></li>
 				</ul>
 			</span>
 		</nav>
