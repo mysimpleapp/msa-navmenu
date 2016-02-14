@@ -10,6 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "mysimpleapp": "*",
-    "msa-user": "*"
+    "msa-db": "*",
+    "msa-user": "*",
+    "msa-edition": "*"
   }
 }
