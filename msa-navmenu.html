@@ -1,5 +1,5 @@
 <link rel="import" href="../mysimpleapp/mysimpleapp.pack.html"></link>
-<link rel="import" href="../msa-edition/msa-box.html"></link>
+<!-- <link rel="import" href="../msa-edition/msa-box.html"></link> -->
 <style>
 	msa-navmenu {
 		display: block;
@@ -21,7 +21,7 @@
 		text-decoration: underline;
 	}
 </style>
-<template>
+<template id="msa-navmenu">
 	<style>
 		#header_menu {
 			position: absolute;
@@ -69,7 +69,6 @@
 			text-decoration: underline;
 		}
 		
-		/*MEDIA QUERY*/
 		@media only screen and (max-width : 640px) {
 			nav {
 				float: none;
@@ -121,7 +120,7 @@
 		}*/
 	</style>
 	<div style="position:relative; height:100%">
-		<msa-navmenu-menu ?if="editable"></msa-navmenu-menu>
+		<!-- <msa-navmenu-menu ?if="editable"></msa-navmenu-menu> -->
 		<content></content>
 		<!-- <content select="header"></content>
 		<div id="header_menu">
@@ -144,8 +143,8 @@
 </template>
 <script>
 (function() {
-	App.registerElement("msa-navmenu", {shadow:"template", oncreate:function(){
-			this.user = App.user
+	App.registerElement("msa-navmenu", {shadow:"#msa-navmenu", oncreate:function(){
+			/*this.user = App.user
 			this.editable = false
 			var navmenu = this
 			Observe(App.user, function() { navmenu.editable = (navmenu.user.groups && navmenu.user.groups.indexOf("admin")!=-1) }, true)
@@ -153,7 +152,7 @@
 			// bind
 			Bind(this.shadowRoot, this);
 			// dynamically import msa-navmenu-menu
-			Observe(this, {editable:true}, function() { App.import('/bower_components/msa-navmenu/msa-navmenu-menu.html') }, true)
+			Observe(this, {editable:true}, function() { App.import('/bower_components/msa-navmenu/msa-navmenu-menu.html') }, true)*/
 		}});
 })();
 </script>
