@@ -39,4 +39,4 @@ var getNavmenuAsPartial = function(req, res, next) {
 }
 
 navmenuApp.get("/", getNavmenuAsPartial)
-navmenuApp.getAsPartial = getNavmenuAsPartial
+navmenuApp.getPartial = getNavmenuAsPartial
