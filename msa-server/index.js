@@ -1,9 +1,9 @@
 var navmenuApp = module.exports = App.subApp()
 
 // require userApp, as default header use user-login box
-require("../../msa-user/server")
+require("../../msa-user/msa-server")
 // sheet
-var sheetApp = require("../../msa-sheet/server")
+var sheetApp = require("../../msa-sheet/msa-server")
 
 // register navmenu sheets
 sheetApp.registerSheet("navmenu", {
