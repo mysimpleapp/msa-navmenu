@@ -54,7 +54,7 @@ sheetApp.createSheet("navmenu", "header", {
 // read //////////////////////////////////////////////////////////////
 
 var getNavmenuAsPartial = function(req, res, next) {
-	sheetApp.getSheet("navmenu", "header", {user:req.user}, function(err, sheet){
+	sheetApp.getSheet("navmenu", "header", {user:req.session.user}, function(err, sheet){
 		if(err) return next(err)
 		res.partial = sheetApp.renderSheetAsHtml(sheet)
 		next()
