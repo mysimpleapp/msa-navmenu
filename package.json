@@ -1,0 +1,17 @@
+{
+  "name": "@mysimpleapp/msa-header",
+  "version": "0.1.0",
+  "description": "Default navigation menu for MySimpleApp application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nicolas CARREZ <nicolas.carrez@gmail.com>",
+  "license": "ISC",
+  "msaKey": "header",
+  "msaDependencies": {
+    "params": "@mysimpleapp/msa-params",
+    "user": "@mysimpleapp/msa-user",
+    "db": "@mysimpleapp/msa-db"
+  }
+}

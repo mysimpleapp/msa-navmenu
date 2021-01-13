@@ -1,2 +1,2 @@
-# msa-navmenu
-Default navigation menu for MySimpleApp application.
+# msa-header
+Default header navigation menu for MySimpleApp application.
