@@ -1,6 +1,6 @@
 const exp = module.exports = {}
 
-const FIELDS = [ "content", "updatedBy", "updatedAt" ]
+const FIELDS = [ "head", "body", "updatedBy", "updatedAt" ]
 
 exp.Header = class {
 

@@ -50,8 +50,8 @@ class MsaHeaderModule extends Msa.Module {
 
 		this.app.post("/_header", userMdw, async (req, res, next) => {
 			try {
-				const { content, by } = req.body
-				await this.upsertHeader(req, content, { by })
+				const { head, body, by } = req.body
+				await this.upsertHeader(req, head, body, { by })
 				res.sendStatus(Msa.OK)
 			} catch(err) { next(err) }
 		})
@@ -75,36 +75,46 @@ class MsaHeaderModule extends Msa.Module {
 		if (!this.canRead(req)) throw Msa.FORBIDDEN
 		const dbHeader = await db.collection("msa_header").findOne({})
 		const header = Header.newFromDb(dbHeader)
-		if(!header.content) {
-			header.content = this.getDefaultContent()
+		if(!header.body) {
+			const defHtml = this.getDefaultHtml()
+			header.head = defHtml.head
+			header.body = defHtml.body
 		}
 		return header
 	}
 
-	getDefaultContent() {
-		return `
-			<msa-utils-text-box>
-				<div class="content">
-					<b>MySimpleApp</b>
-				</div>
-			</msa-utils-text-box>
-			<msa-user-signin-box></msa-user-signin-box>
-		`
+	getDefaultHtml() {
+		return {
+			head: `
+				<script type="module" src="/utils/msa-utils.js"></script>
+				<script type="module" src="/user/msa-user-signin-box.js"></script>
+			`,
+			body: `
+				<msa-utils-text-box>
+					<div class="content">
+						<b>MySimpleApp</b>
+					</div>
+				</msa-utils-text-box>
+				<msa-user-signin-box></msa-user-signin-box>
+			`
+		}
 	}
 
 	exportHeader(req, header) {
 		return {
-			content: header.content,
+			head: header.head,
+			body: header.body,
 			updatedBy: header.updatedBy,
 			updatedAt: header.updatedAt ? header.updatedAt.toISOString() : null,
 			canEdit: this.canWrite(req)
 		}
 	}
 
-	async upsertHeader(req, content, kwargs) {
+	async upsertHeader(req, head, body, kwargs) {
 		const header = await this.getHeader(req)
 		if (!this.canWrite(req)) throw Msa.FORBIDDEN
-		header.content = content
+		header.head = head
+		header.body = body
 		header.updatedBy = this.getUserName(req, kwargs && kwargs.by)
 		header.updatedAt = new Date(Date.now())
 		await db.collection("msa_header").updateOne({}, { $set: header.formatForDb() }, { upsert: true })
@@ -117,12 +127,15 @@ let gMsaHeaderModule = null
 async function getHtml(req) {
 	const header = await gMsaHeaderModule.getHeader(req)
 	return {
-		wel: "/header/msa-header.js",
-		attrs: {
-			'editable': gMsaHeaderModule.canWrite(req),
-			'fetch': 'false'
-		},
-		content: header.content
+		head: header.head,
+		body: {
+			wel: "/header/msa-header.js",
+			attrs: {
+				'editable': gMsaHeaderModule.canWrite(req),
+				'fetch': 'false'
+			},
+			content: header.body
+		}
 	}
 }
 
