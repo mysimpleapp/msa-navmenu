@@ -1,7 +1,8 @@
-import { importHtml, importOnCall, ajax, exposeMsaBoxCtx } from "/utils/msa-utils.js"
+import { importHtml, importOnCall, ajax, exposeMsaBoxCtx } from "/msa/utils/msa-utils.js"
 
-const editMsaBoxes = importOnCall("/utils/msa-utils-box-edition.js", "editMsaBoxes")
-const exportMsaBoxes = importOnCall("/utils/msa-utils-box-edition.js", "exportMsaBoxes")
+const srcMsaBoxEdition = "/msa/utils/msa-utils-box-edition.js"
+const editMsaBoxes = importOnCall(srcMsaBoxEdition, "editMsaBoxes")
+const exportMsaBoxes = importOnCall(srcMsaBoxEdition, "exportMsaBoxes")
 
 importHtml(`<style>
 	msa-header {

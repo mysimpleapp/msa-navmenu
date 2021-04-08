@@ -5,7 +5,6 @@ const { useMsaBoxesRouter } = Msa.require("utils")
 const { globalParams } = Msa.require("params")
 const { db } = Msa.require("db")
 const { userMdw, unauthHtml } = Msa.require("user")
-//const { MsaSheet, renderSheetAsHtml } = Msa.require("sheet/module")
 
 class MsaHeaderModule extends Msa.Module {
 
@@ -61,16 +60,7 @@ class MsaHeaderModule extends Msa.Module {
 			parentId: "header"
 		}))
 	}
-	/*
-		initSheetMod() {
-			this.sheetMod = new class extends MsaSheet {
-				getId(ctx, reqId) {
-					return `page-${reqId}`
-				}
-			}
-			this.app.use("/_sheet", this.sheetMod.app)
-		}
-	*/
+
 	async getHeader(req) {
 		if (!this.canRead(req)) throw Msa.FORBIDDEN
 		const dbHeader = await db.collection("msa_header").findOne({})
@@ -86,8 +76,8 @@ class MsaHeaderModule extends Msa.Module {
 	getDefaultHtml() {
 		return {
 			head: `
-				<script type="module" src="/utils/msa-utils.js"></script>
-				<script type="module" src="/user/msa-user-signin-box.js"></script>
+				<script type="module" src="/msa/utils/msa-utils.js"></script>
+				<script type="module" src="/msa/user/msa-user-signin-box.js"></script>
 			`,
 			body: `
 				<msa-utils-text-box>
@@ -129,7 +119,7 @@ async function getHtml(req) {
 	return {
 		head: header.head,
 		body: {
-			wel: "/header/msa-header.js",
+			wel: "/msa/header/msa-header.js",
 			attrs: {
 				'editable': gMsaHeaderModule.canWrite(req),
 				'fetch': 'false'
